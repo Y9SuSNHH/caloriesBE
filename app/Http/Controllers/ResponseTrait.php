@@ -11,7 +11,7 @@ trait ResponseTrait
         return response()->json([
             'success' => true,
             'data'    => $data,
-            'message' => $message
+            'message' => $message,
         ]);
     }
 
@@ -20,7 +20,7 @@ trait ResponseTrait
         return response()->json([
             'success' => false,
             'data'    => [],
-            'message' => $message
+            'message' => $message,
         ], $status);
     }
 }

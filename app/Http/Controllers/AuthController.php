@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -17,39 +17,51 @@ class AuthController extends Controller
         //
     }
 
-    public function login()
-    {
-        dd(1);
-    }
-
-    public function register(Request $request): JsonResponse
+    /**
+     * @param LoginRequest $request
+     * @return JsonResponse
+     */
+    public function login(LoginRequest $request): JsonResponse
     {
         try {
-            $validated = $request->validate([
-                'name'     => 'required|string',
-                'birthday' => 'required|date_format:Y-m-d',
-                'password' => 'required',
-            ]);
-            $password  = Hash::make($validated->password);
-            if (auth()->check()) {
-                User::query()->where('id', auth()->user()->id)
-                    ->update([
-                        'name'     => $request->name,
-                        'gender'   => $request->gender,
-                        'phone'    => $request->phone,
-                        'password' => $password,
-                    ]);
-            } else {
-                $user = User::create([
-                    'name'     => $request->name,
-                    'gender'   => $request->gender,
-                    'phone'    => $request->phone,
-                    'email'    => $request->email,
-                    'password' => $password,
-                ]);
-                Auth::login($user);
+            $validated   = $request->validated();
+            $user = User::query()
+                ->where('email', $validated['email'])
+                ->first();
+
+            if (!$user) {
+                return $this->errorResponse('Email đăng nhập không tồn tại');
             }
-            return $this->successResponse(1);
+            if (!Hash::check($validated['password'], $user->password)) {
+                return $this->errorResponse('Mật khẩu sai');
+            }
+            return $this->successResponse($user);
+        } catch (\Throwable $e) {
+            return $this->errorResponse($e->getMessage());
+        }
+    }
+
+    /**
+     * @param RegisterRequest $request
+     * @return JsonResponse
+     */
+    public function register(RegisterRequest $request): JsonResponse
+    {
+        try {
+            $validated = $request->validated();
+            $password  = Hash::make($validated['password']);
+            $user      = User::create([
+                'name'     => $validated['name'],
+                'birthday' => $validated['birthday'],
+                'avatar'   => $validated['avatar'] ?? '',
+                'address'  => $validated['address'] ?? '',
+                'weight'   => $validated['weight'],
+                'height'   => $validated['height'],
+                'gender'   => $validated['gender'],
+                'email'    => $validated['email'],
+                'password' => $password,
+            ]);
+            return $this->successResponse($user);
         } catch (\Throwable $e) {
             return $this->errorResponse($e->getMessage());
         }
