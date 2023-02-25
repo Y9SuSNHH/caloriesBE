@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace App\Http\Requests\User;
 
-use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class RegisterRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,11 +25,9 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name'     => [
-                'required',
                 'string',
             ],
             'birthday' => [
-                'required',
                 'date_format:Y-m-d',
             ],
             'avatar'   => [
@@ -41,27 +37,15 @@ class RegisterRequest extends FormRequest
                 'string',
             ],
             'weight'   => [
-                'required',
                 'numeric',
                 'min:0',
             ],
             'height'   => [
-                'required',
                 'numeric',
                 'min:0',
             ],
             'gender'   => [
-                'required',
                 'boolean',
-            ],
-            'email'    => [
-                'required',
-                'email',
-                Rule::unique(User::class, 'email'),
-            ],
-            'password' => [
-                'required',
-                'min:6',
             ],
         ];
     }
@@ -90,7 +74,6 @@ class RegisterRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'required'     => ':attribute bắt buộc điền',
             'numeric'      => ':attribute phải là kiểu số',
             'boolean'      => ':attribute phải là kiểu boolean',
             'email'        => ':attribute sai định dạng email',

@@ -35,7 +35,7 @@ class AuthController extends Controller
             if (!Hash::check($validated['password'], $user->password)) {
                 return $this->errorResponse('Mật khẩu sai');
             }
-            return $this->successResponse($user);
+            return $this->successResponse($user,'Đăng nhập thành công');
         } catch (\Throwable $e) {
             return $this->errorResponse($e->getMessage());
         }
@@ -61,7 +61,7 @@ class AuthController extends Controller
                 'email'    => $validated['email'],
                 'password' => $password,
             ]);
-            return $this->successResponse($user);
+            return $this->successResponse($user,'Đăng kí thành công');
         } catch (\Throwable $e) {
             return $this->errorResponse($e->getMessage());
         }

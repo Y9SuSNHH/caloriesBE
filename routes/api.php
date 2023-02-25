@@ -1,7 +1,11 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\BmiController;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WorkoutController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,7 +26,37 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
 Route::group([
-    'prefix'     => 'v1',
+    'prefix' => 'v1',
 ], function () {
-    Route::get('users/show/{id}', [UserController::class, 'show']);
+    Route::group([
+        'prefix' => 'users',
+    ], function () {
+        Route::get('/{id}', [UserController::class, 'show']);
+        Route::put('/{id}', [UserController::class, 'update']);
+        Route::patch('/{id}', [UserController::class, 'update']);
+    });
+
+    Route::group([
+        'prefix' => 'workouts',
+    ], function () {
+        Route::get('/', [WorkoutController::class, 'index']);
+    });
+
+    Route::group([
+        'prefix' => 'tags',
+    ], function () {
+        Route::get('/', [TagController::class, 'index']);
+    });
+
+    Route::group([
+        'prefix' => 'blogs',
+    ], function () {
+        Route::get('/', [BlogController::class, 'index']);
+    });
+
+    Route::group([
+        'prefix' => 'bmis',
+    ], function () {
+        Route::get('/{userId}', [BmiController::class, 'index']);
+    });
 });

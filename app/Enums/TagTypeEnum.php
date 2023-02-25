@@ -6,9 +6,9 @@ use BenSampo\Enum\Enum;
 
 final class TagTypeEnum extends Enum
 {
-    public const  FOOD    = 0;
-    public const  BLOG    = 1;
-    public const  WORKOUT = 2;
+    public const  FOOD    = 1;
+    public const  BLOG    = 2;
+    public const  WORKOUT = 3;
 
     public static function getArrayView(): array
     {

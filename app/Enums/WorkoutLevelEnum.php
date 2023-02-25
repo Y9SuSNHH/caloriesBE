@@ -6,9 +6,9 @@ use BenSampo\Enum\Enum;
 
 final class WorkoutLevelEnum extends Enum
 {
-    public const  EASY   = 0;
-    public const  MEDIUM = 1;
-    public const  HARD   = 2;
+    public const  EASY   = 1;
+    public const  MEDIUM = 2;
+    public const  HARD   = 3;
 
     public static function getArrayView(): array
     {
