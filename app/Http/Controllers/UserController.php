@@ -18,13 +18,13 @@ class UserController extends Controller
     }
 
     /**
-     * @param $userId
+     * @param $id
      * @return JsonResponse
      */
-    public function show($userId): JsonResponse
+    public function show($id): JsonResponse
     {
         try {
-            $user = $this->model->find($userId);
+            $user = $this->model->find($id);
             return $this->successResponse($user, 'Lấy thông tin người dùng thành công');
         } catch (\Throwable $e) {
             return $this->errorResponse($e->getMessage());
@@ -33,15 +33,16 @@ class UserController extends Controller
 
     /**
      * @param UpdateRequest $request
-     * @param $userId
+     * @param $id
      * @return JsonResponse
      */
-    public function update(UpdateRequest $request, $userId): JsonResponse
+    public function update(UpdateRequest $request, $id): JsonResponse
     {
         try {
             $validated = $request->validated();
-            $this->model->find($userId)->update($validated);
-            return $this->successResponse([], 'Cập nhật thông tin người dùng thành công');
+            $user = $this->model->find($id);
+            $user->update($validated);
+            return $this->successResponse($user, 'Cập nhật thông tin người dùng thành công');
         } catch (\Throwable $e) {
             return $this->errorResponse($e->getMessage());
         }

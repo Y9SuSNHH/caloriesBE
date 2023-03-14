@@ -35,7 +35,7 @@ class RegisterRequest extends FormRequest
                 'date_format:Y-m-d',
             ],
             'avatar'   => [
-                'image',
+                'string',
             ],
             'address'  => [
                 'string',
