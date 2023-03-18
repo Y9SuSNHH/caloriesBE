@@ -2,10 +2,12 @@
 
 namespace App\Http\Requests\User;
 
+use App\Http\Controllers\ResponseTrait;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateRequest extends FormRequest
 {
+    use ResponseTrait;
     /**
      * Determine if the user is authorized to make this request.
      *

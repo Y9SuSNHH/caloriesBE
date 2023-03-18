@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Contracts\Validation\Validator;
 
 trait ResponseTrait
 {
@@ -15,12 +17,20 @@ trait ResponseTrait
         ]);
     }
 
-    public function errorResponse($message = '', $status = 400): JsonResponse
+    public function errorResponse($message = '', $data = [], $status = 400): JsonResponse
     {
         return response()->json([
             'success' => false,
-            'data'    => [],
+            'data'    => $data,
             'message' => $message,
         ], $status);
+    }
+
+    public function failedValidation(Validator $validator)
+    {
+        if ($validator->fails()) {
+//            throw new HttpResponseException(self::errorResponse($validator->errors()));
+            return self::errorResponse($validator->errors());
+        }
     }
 }

@@ -50,7 +50,7 @@ class AuthController extends Controller
         try {
             $validated = $request->validated();
             $password  = Hash::make($validated['password']);
-            $user      = User::create([
+            $user      = User::query()->create([
                 'name'     => $validated['name'],
                 'birthday' => $validated['birthday'],
                 'avatar'   => $validated['avatar'] ?? '',

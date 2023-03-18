@@ -2,12 +2,14 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Http\Controllers\ResponseTrait;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 class RegisterRequest extends FormRequest
 {
+    use ResponseTrait;
     /**
      * Determine if the user is authorized to make this request.
      *

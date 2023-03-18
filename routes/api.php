@@ -5,6 +5,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BmiController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserWorkoutController;
 use App\Http\Controllers\WorkoutController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,9 @@ Route::group([
     Route::group([
         'prefix' => 'users',
     ], function () {
+        Route::get('/{userId}/workouts', [UserWorkoutController::class, 'getByUserId']);
+        Route::post('/{userId}/workouts/{workoutId}', [UserWorkoutController::class, 'store']);
+
         Route::get('/{id}', [UserController::class, 'show']);
         Route::put('/{id}', [UserController::class, 'update']);
         Route::patch('/{id}', [UserController::class, 'update']);
@@ -55,8 +59,9 @@ Route::group([
     });
 
     Route::group([
-        'prefix' => 'bmis',
+        'prefix' => 'bmi',
     ], function () {
         Route::get('/{userId}', [BmiController::class, 'index']);
+        Route::post('/{userId}', [BmiController::class, 'store']);
     });
 });

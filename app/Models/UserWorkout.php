@@ -6,14 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Bmi extends Model
+class UserWorkout extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+        'workout_realtime',
+        'calo_real',
         'user_id',
-        'weight',
-        'height',
+        'workout_id',
     ];
 
     /**
