@@ -3,7 +3,9 @@
 namespace App\Http\Requests\User;
 
 use App\Http\Controllers\ResponseTrait;
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateRequest extends FormRequest
 {
@@ -27,9 +29,11 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name'     => [
+                'required',
                 'string',
             ],
             'birthday' => [
+                'required',
                 'date_format:Y-m-d',
             ],
             'avatar'   => [
@@ -47,8 +51,13 @@ class UpdateRequest extends FormRequest
                 'min:0',
             ],
             'gender'   => [
+                'required',
                 'boolean',
             ],
+            'email'   => [
+                'required',
+                Rule::unique(User::class,'email')->ignore($this->email,'email')
+            ]
         ];
     }
 

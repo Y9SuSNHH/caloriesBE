@@ -20,6 +20,9 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->integer('calo');
             $table->timestamps();
+
+            $table->unsignedBigInteger('tag_id');
+            $table->foreign('tag_id')->references('id')->on('tags');
         });
     }
 

@@ -40,7 +40,8 @@ class UserController extends Controller
     {
         try {
             $validated = $request->validated();
-            $user = $this->model->find($id);
+            $user      = $this->model->find($id);
+            dd($request->all());
             $user->update($validated);
             return $this->successResponse($user, 'Cập nhật thông tin người dùng thành công');
         } catch (\Throwable $e) {

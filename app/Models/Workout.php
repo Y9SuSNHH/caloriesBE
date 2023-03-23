@@ -12,6 +12,16 @@ class Workout extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'description',
+        'image',
+        'time',
+        'calo',
+        'video',
+        'level',
+    ];
+
     /**
      * @return BelongsToMany
      */

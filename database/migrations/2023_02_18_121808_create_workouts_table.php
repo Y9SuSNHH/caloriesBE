@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->text('image')->nullable()->change();
+            $table->text('image')->nullable();
             $table->integer('time');
             $table->integer('calo');
             $table->string('video');

@@ -10,6 +10,14 @@ class Blog extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'description',
+        'link',
+        'image',
+        'tag_id',
+    ];
+
     /**
      * @return BelongsTo
      */

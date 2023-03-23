@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_workout', function (Blueprint $table) {
+        Schema::create('user_workouts', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('workout_realtime');
             $table->integer('calo_real');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('workout_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('workout_id')->references('id')->on('users');
+            $table->foreign('workout_id')->references('id')->on('workouts');
             $table->timestamps();
         });
     }
