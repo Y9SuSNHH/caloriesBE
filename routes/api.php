@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BmiController;
+use App\Http\Controllers\FoodController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserWorkoutController;
@@ -34,7 +35,6 @@ Route::group([
     ], function () {
         Route::get('/{userId}/workouts', [UserWorkoutController::class, 'getByUserId']);
         Route::post('/{userId}/workouts/{workoutId}', [UserWorkoutController::class, 'store']);
-
         Route::get('/{id}', [UserController::class, 'show']);
         Route::put('/{id}', [UserController::class, 'update']);
         Route::patch('/{id}', [UserController::class, 'update']);
@@ -56,6 +56,12 @@ Route::group([
         'prefix' => 'blogs',
     ], function () {
         Route::get('/', [BlogController::class, 'index']);
+    });
+
+    Route::group([
+        'prefix' => 'foods',
+    ], function () {
+        Route::get('/', [FoodController::class, 'index']);
     });
 
     Route::group([
