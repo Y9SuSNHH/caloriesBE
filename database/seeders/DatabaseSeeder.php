@@ -17,9 +17,10 @@ class DatabaseSeeder extends Seeder
         $this->call([
             TagSeeder::class,
             UserSeeder::class,
-            WorkoutSeed::class,
+            WorkoutSeeder::class,
             BlogSeeder::class,
             FoodSeeder::class,
+            UserWorkoutSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
     }

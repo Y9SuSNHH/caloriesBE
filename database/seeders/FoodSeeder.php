@@ -16,7 +16,6 @@ class FoodSeeder extends Seeder
     public function run()
     {
         $data = [
-            ['name' => 'Súp lơ (100g)', 'image' => 'images/foods/rau sup lơ thơm ngon bổ dưỡng như Huy :V', 'description' => 'rau sup lơ thơm ngon bổ dưỡng như Huy :V', 'calo' => '200', 'tag_id' => '1'],
             ['name' => 'Rau chân vịt', 'image' => 'images/foods/rauchanvit.jpeg', 'description' => 'Rau chân vịt thơm ngon', 'calo' => '8', 'tag_id' => '1'],
             ['name' => 'Dưa leo', 'image' => 'images/foods/dualeo.jpeg', 'description' => 'Dưa leo thơm ngon', 'calo' => '10', 'tag_id' => '1'],
             ['name' => 'Bắp cải', 'image' => 'images/foods/bapcai.jpeg', 'description' => 'Bắp cải thơm ngon', 'calo' => '20', 'tag_id' => '1'],
