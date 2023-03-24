@@ -40,7 +40,7 @@ class WorkoutController extends Controller
                 'exists'  => ':attribute không tồn tại với workout',
             ]);
 
-            $query = $this->model;
+            $query = $this->model->clone();
 
             if (!empty($validated['level'])) {
                 $query->where('level', $validated['level']);
@@ -51,7 +51,7 @@ class WorkoutController extends Controller
                     $q->whereRelation('tags', 'id', '=', "$tag");
                 });
             }
-            $query->with('tags:id,group,name,description');
+            $query->with('tags:id,name,description');
 
             $workouts = $query->get();
 

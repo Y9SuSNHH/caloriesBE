@@ -27,11 +27,11 @@ class FoodController extends Controller
                 'tag' => [
                     'integer',
                     Rule::exists(Tag::class, 'id')
-                        ->where('type', TagTypeEnum::BLOG),
+                        ->where('type', TagTypeEnum::FOOD),
                 ],
             ], [
                 'integer' => ':attribute phải là kiểu số',
-                'exists'  => ':attribute không tồn tại với blogs',
+                'exists'  => ':attribute không tồn tại với foods',
             ])->validated();
 
             $query = $this->model->clone()->with('tag');
