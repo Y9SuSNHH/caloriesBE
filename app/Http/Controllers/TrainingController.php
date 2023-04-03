@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\TagTypeEnum;
 use App\Enums\TrainingStatusEnum;
 use App\Http\Requests\Training\UpdateRequest;
 use App\Models\TagWorkout;
@@ -35,7 +36,7 @@ class TrainingController extends Controller
             $training = Training::query()->where('user_id', $userId)->first();
             if ($training->count() === 0 || $training->tag_id !== $tagId) {
                 $this->query->where('user_id', $userId)->delete();
-                $workouts = TagWorkout::query()->where('tag_id', $tagId)->get()->pluck('workout_id');
+                $workouts = TagWorkout::query()->where('tag_id', $tagId)->where('type', TagTypeEnum::WORKOUT)->get()->pluck('workout_id');
                 $data     = [];
                 foreach ($workouts as $key => $value) {
                     $data[] = [
