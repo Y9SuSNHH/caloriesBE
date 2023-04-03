@@ -34,9 +34,9 @@ class TrainingController extends Controller
         DB::beginTransaction();
         try {
             $training = Training::query()->where('user_id', $userId)->first();
-            if ($training->count() === 0 || $training->tag_id !== $tagId) {
+            if (empty($training) || $training->tag_id !== $tagId) {
                 $this->query->where('user_id', $userId)->delete();
-                $workouts = TagWorkout::query()->where('tag_id', $tagId)->where('type', TagTypeEnum::WORKOUT)->get()->pluck('workout_id');
+                $workouts = TagWorkout::query()->where('tag_id', $tagId)->get()->pluck('workout_id');
                 $data     = [];
                 foreach ($workouts as $key => $value) {
                     $data[] = [
