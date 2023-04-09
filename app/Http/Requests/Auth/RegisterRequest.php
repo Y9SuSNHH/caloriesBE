@@ -37,9 +37,11 @@ class RegisterRequest extends FormRequest
                 'date_format:Y-m-d',
             ],
             'avatar'   => [
+                'nullable',
                 'string',
             ],
             'address'  => [
+                'nullable',
                 'string',
             ],
             'weight'   => [

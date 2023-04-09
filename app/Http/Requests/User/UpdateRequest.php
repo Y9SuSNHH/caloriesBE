@@ -37,16 +37,20 @@ class UpdateRequest extends FormRequest
                 'date_format:Y-m-d',
             ],
             'avatar'   => [
+                'nullable',
                 'string',
             ],
             'address'  => [
+                'nullable',
                 'string',
             ],
             'weight'   => [
+                'required',
                 'numeric',
                 'min:0',
             ],
             'height'   => [
+                'required',
                 'numeric',
                 'min:0',
             ],
